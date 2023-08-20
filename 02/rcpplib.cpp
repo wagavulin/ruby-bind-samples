@@ -11,7 +11,7 @@ static void wrap_Cpplib_A_free(struct Wrap_Cpplib_A* ptr){
     delete ptr->obj;
     ruby_xfree(ptr);
 };
-static const rb_data_type_t A_type {
+static const rb_data_type_t Cpplib_A_type {
     "A",
     {NULL, reinterpret_cast<RUBY_DATA_FUNC>(wrap_Cpplib_A_free), NULL},
     NULL, NULL,
@@ -19,18 +19,18 @@ static const rb_data_type_t A_type {
 };
 static VALUE wrap_Cpplib_A_init(int argc, VALUE *argv, VALUE self){
     Wrap_Cpplib_A* ptr;
-    TypedData_Get_Struct(self, struct Wrap_Cpplib_A, &A_type, ptr);
+    TypedData_Get_Struct(self, struct Wrap_Cpplib_A, &Cpplib_A_type, ptr);
     ptr->obj = new A();
     return Qnil;
 }
 static A* get_Cpplib_A(VALUE self){
     struct Wrap_Cpplib_A* ptr;
-    TypedData_Get_Struct(self, struct Wrap_Cpplib_A, &A_type, ptr);
+    TypedData_Get_Struct(self, struct Wrap_Cpplib_A, &Cpplib_A_type, ptr);
     return ptr->obj;
 }
 static VALUE wrap_Cpplib_A_alloc(VALUE klass){
     struct Wrap_Cpplib_A* ptr = nullptr;
-    VALUE ret = TypedData_Make_Struct(klass, struct Wrap_Cpplib_A, &A_type, ptr);
+    VALUE ret = TypedData_Make_Struct(klass, struct Wrap_Cpplib_A, &Cpplib_A_type, ptr);
     return ret;
 }
 static VALUE wrap_Cpplib_A_method1(int argc, VALUE *argv, VALUE self){
@@ -45,7 +45,7 @@ static void wrap_Cpplib_B_free(struct Wrap_Cpplib_B* ptr){
     delete ptr->obj;
     ruby_xfree(ptr);
 };
-static const rb_data_type_t B_type {
+static const rb_data_type_t Cpplib_B_type {
     "B",
     {NULL, reinterpret_cast<RUBY_DATA_FUNC>(wrap_Cpplib_B_free), NULL},
     NULL, NULL,
@@ -53,18 +53,18 @@ static const rb_data_type_t B_type {
 };
 static VALUE wrap_Cpplib_B_init(int argc, VALUE *argv, VALUE self){
     Wrap_Cpplib_B* ptr;
-    TypedData_Get_Struct(self, struct Wrap_Cpplib_B, &B_type, ptr);
+    TypedData_Get_Struct(self, struct Wrap_Cpplib_B, &Cpplib_B_type, ptr);
     ptr->obj = new B();
     return Qnil;
 }
 static A* get_Cpplib_B(VALUE self){
     struct Wrap_Cpplib_B* ptr;
-    TypedData_Get_Struct(self, struct Wrap_Cpplib_B, &B_type, ptr);
+    TypedData_Get_Struct(self, struct Wrap_Cpplib_B, &Cpplib_B_type, ptr);
     return ptr->obj;
 }
 static VALUE wrap_Cpplib_B_alloc(VALUE klass){
     struct Wrap_Cpplib_B* ptr = nullptr;
-    VALUE ret = TypedData_Make_Struct(klass, struct Wrap_Cpplib_B, &B_type, ptr);
+    VALUE ret = TypedData_Make_Struct(klass, struct Wrap_Cpplib_B, &Cpplib_B_type, ptr);
     return ret;
 }
 
