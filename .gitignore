@@ -1,0 +1,5 @@
+01/Makefile
+02/Makefile
+*.d
+*.o
+*.so
