@@ -38,33 +38,33 @@ static VALUE wrap_Cpplib_A_method1(int argc, VALUE *argv, VALUE self){
     return Qnil;
 }
 
-struct Wrap_Cpplib_B {
-    B* obj;
-};
-static void wrap_Cpplib_B_free(struct Wrap_Cpplib_B* ptr){
-    delete ptr->obj;
-    ruby_xfree(ptr);
-};
+// struct Wrap_Cpplib_B {
+//     B* obj;
+// };
+// static void wrap_Cpplib_B_free(struct Wrap_Cpplib_B* ptr){
+//     delete ptr->obj;
+//     ruby_xfree(ptr);
+// };
 static const rb_data_type_t Cpplib_B_type {
     "B",
-    {NULL, reinterpret_cast<RUBY_DATA_FUNC>(wrap_Cpplib_B_free), NULL},
-    NULL, NULL,
+    {NULL, reinterpret_cast<RUBY_DATA_FUNC>(wrap_Cpplib_A_free), NULL},
+    &Cpplib_A_type, NULL,
     RUBY_TYPED_FREE_IMMEDIATELY
 };
 static VALUE wrap_Cpplib_B_init(int argc, VALUE *argv, VALUE self){
-    Wrap_Cpplib_B* ptr;
-    TypedData_Get_Struct(self, struct Wrap_Cpplib_B, &Cpplib_B_type, ptr);
+    Wrap_Cpplib_A* ptr;
+    TypedData_Get_Struct(self, struct Wrap_Cpplib_A, &Cpplib_B_type, ptr);
     ptr->obj = new B();
     return Qnil;
 }
-static A* get_Cpplib_B(VALUE self){
-    struct Wrap_Cpplib_B* ptr;
-    TypedData_Get_Struct(self, struct Wrap_Cpplib_B, &Cpplib_B_type, ptr);
-    return ptr->obj;
+static B* get_Cpplib_B(VALUE self){
+    struct Wrap_Cpplib_A* ptr;
+    TypedData_Get_Struct(self, struct Wrap_Cpplib_A, &Cpplib_B_type, ptr);
+    return static_cast<B*>(ptr->obj);
 }
 static VALUE wrap_Cpplib_B_alloc(VALUE klass){
-    struct Wrap_Cpplib_B* ptr = nullptr;
-    VALUE ret = TypedData_Make_Struct(klass, struct Wrap_Cpplib_B, &Cpplib_B_type, ptr);
+    struct Wrap_Cpplib_A* ptr = nullptr;
+    VALUE ret = TypedData_Make_Struct(klass, struct Wrap_Cpplib_A, &Cpplib_B_type, ptr);
     return ret;
 }
 
