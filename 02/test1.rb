@@ -8,3 +8,4 @@ a.method1
 
 b = Rcpplib::B.new
 b.method1
+b.method2

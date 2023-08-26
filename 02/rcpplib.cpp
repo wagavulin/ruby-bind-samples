@@ -67,6 +67,10 @@ static VALUE wrap_Cpplib_B_alloc(VALUE klass){
     VALUE ret = TypedData_Make_Struct(klass, struct Wrap_Cpplib_A, &Cpplib_B_type, ptr);
     return ret;
 }
+static VALUE wrap_Cpplib_B_method2(int argc, VALUE *argv, VALUE self){
+    get_Cpplib_B(self)->method2();
+    return Qnil;
+}
 
 extern "C" {
 void Init_rcpplib(){
@@ -79,5 +83,6 @@ void Init_rcpplib(){
     VALUE cCpplib_B = rb_define_class_under(mRcpplib, "B", cCpplib_A);
     rb_define_alloc_func(cCpplib_B, wrap_Cpplib_B_alloc);
     rb_define_private_method(cCpplib_B, "initialize", RUBY_METHOD_FUNC(wrap_Cpplib_B_init), -1);
+    rb_define_method(cCpplib_B, "method2", RUBY_METHOD_FUNC(wrap_Cpplib_B_method2), -1);
 }
 }
