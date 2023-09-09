@@ -13,4 +13,4 @@ b.x = 30
 a.b = b
 p "expected: 30, actual: #{a.b.x}"
 b.x = 40
-p "expected: ??, actual: #{a.b.x}"
+p "expected: 40, actual: #{a.b.x}"
