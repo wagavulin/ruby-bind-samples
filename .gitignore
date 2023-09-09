@@ -1,5 +1,4 @@
-01/Makefile
-02/Makefile
+*/Makefile
 *.d
 *.o
 *.so
